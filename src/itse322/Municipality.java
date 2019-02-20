@@ -1,6 +1,8 @@
 
 package itse322;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,8 +14,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import static java.nio.charset.StandardCharsets.*;
 import java.sql.PreparedStatement;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -24,9 +29,7 @@ public class Municipality extends JFrame {
      DefaultTableModel model;
     public Municipality() {
         initComponents();
-        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);
-        renderer.setHorizontalAlignment( jLabel1.RIGHT );
-
+        getContentPane().setBackground(new Color(248, 248, 251));
         showData(null);
     }
     
@@ -109,6 +112,7 @@ public class Municipality extends JFrame {
     
     public void executeSQLQuery(String  query, String message)
     {
+       
      try
      {
          Connection connection = DB.DBconnect();
@@ -156,17 +160,17 @@ public class Municipality extends JFrame {
         jLabel4 = new javax.swing.JLabel();
         usernameField6 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         id_text = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         name_text = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         geography_combo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
         pop_text = new javax.swing.JTextField();
-        phoneNumber_text = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         nod_text = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        phoneNumber_text = new javax.swing.JTextField();
         btn_delete = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         search_text = new javax.swing.JTextField();
@@ -175,6 +179,8 @@ public class Municipality extends JFrame {
         btn_add = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("ID :");
@@ -205,26 +211,6 @@ public class Municipality extends JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("رقـــم الـبـلــديـــة");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("اســـم الـبـلــديـــة");
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("عــدد الــســكــان");
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("المنطقة الجغرافية");
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("رقـــم الـهــاتـــف");
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("اســـم الـعــمــيــد");
-
         id_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         id_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,12 +218,20 @@ public class Municipality extends JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("اســـم الـبـلــديـــة");
+
         name_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         name_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_textActionPerformed(evt);
             }
         });
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("المنطقة الجغرافية");
 
         geography_combo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         geography_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "طرابلس الكبرى", "سهل جفارة", "وادي الحياة", "الجبل الأخضر", "البطنان", "وادي الشاطئ", "الجبل الغربي", "غات", " " }));
@@ -247,6 +241,10 @@ public class Municipality extends JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("عــدد الــســكــان");
+
         pop_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         pop_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,12 +252,9 @@ public class Municipality extends JFrame {
             }
         });
 
-        phoneNumber_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        phoneNumber_text.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneNumber_textActionPerformed(evt);
-            }
-        });
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("اســـم الـعــمــيــد");
 
         nod_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         nod_text.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +263,18 @@ public class Municipality extends JFrame {
             }
         });
 
-        btn_delete.setBackground(new java.awt.Color(198, 40, 40));
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("رقـــم الـهــاتـــف");
+
+        phoneNumber_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        phoneNumber_text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneNumber_textActionPerformed(evt);
+            }
+        });
+
+        btn_delete.setBackground(new java.awt.Color(255, 51, 51));
         btn_delete.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_delete.setText("حــــــذف");
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
@@ -277,6 +283,7 @@ public class Municipality extends JFrame {
             }
         });
 
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("نـــظـــام بـــلـــديـــات لـــيــــبــــيـــا");
@@ -296,10 +303,7 @@ public class Municipality extends JFrame {
             }
         });
 
-        table.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        table.setForeground(new java.awt.Color(1, 87, 155));
-        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);
-        renderer.setHorizontalAlignment(JLabel.RIGHT);
+        table.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -316,14 +320,24 @@ public class Municipality extends JFrame {
                 return canEdit [columnIndex];
             }
         });
+        table.setFocusable(false);
+        table.setRequestFocusEnabled(false);
         table.setRowHeight(30);
-        table.setRowMargin(3);
+        table.setRowMargin(0);
+        table.setSelectionBackground(new java.awt.Color(0, 153, 153));
         table.getTableHeader().setResizingAllowed(false);
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableMouseClicked(evt);
             }
         });
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        for(int i = 0; i < 6; i++){
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            table.getColumnModel().getColumn(i).setHeaderRenderer(centerRenderer);
+        }
         jScrollPane1.setViewportView(table);
         if (table.getColumnModel().getColumnCount() > 0) {
             table.getColumnModel().getColumn(0).setResizable(false);
@@ -332,9 +346,10 @@ public class Municipality extends JFrame {
             table.getColumnModel().getColumn(3).setResizable(false);
             table.getColumnModel().getColumn(4).setResizable(false);
             table.getColumnModel().getColumn(5).setResizable(false);
+            table.getColumnModel().getColumn(5).setPreferredWidth(25);
         }
 
-        btn_add.setBackground(new java.awt.Color(46, 125, 50));
+        btn_add.setBackground(new java.awt.Color(0, 153, 0));
         btn_add.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_add.setText("إضـــافـــة");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
@@ -343,7 +358,7 @@ public class Municipality extends JFrame {
             }
         });
 
-        btn_edit.setBackground(new java.awt.Color(1, 87, 155));
+        btn_edit.setBackground(new java.awt.Color(0, 153, 255));
         btn_edit.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btn_edit.setText("تـــعـــديـــل");
         btn_edit.addActionListener(new java.awt.event.ActionListener() {
@@ -352,15 +367,38 @@ public class Municipality extends JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("الـبـحـث عـن بـلـديـة");
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("إضـافـة وتـعـديـل البـيـانـات");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,23 +415,27 @@ public class Municipality extends JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel9))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(name_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(geography_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pop_text, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nod_text, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phoneNumber_text, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(id_text, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(name_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(geography_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pop_text, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nod_text, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(phoneNumber_text, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(id_text, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(50, 50, 50))
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,8 +444,9 @@ public class Municipality extends JFrame {
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search_text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(search_text, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -429,7 +472,7 @@ public class Municipality extends JFrame {
                             .addComponent(nod_text))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phoneNumber_text)
+                            .addComponent(phoneNumber_text, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -533,7 +576,7 @@ public class Municipality extends JFrame {
     }//GEN-LAST:event_phoneNumber_textActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-
+            
         int selectedRow = table.getSelectedRow();
         if (selectedRow != -1) {
             btn_delete.setEnabled(true);
@@ -596,6 +639,7 @@ public class Municipality extends JFrame {
     private javax.swing.JComboBox<String> geography_combo;
     private javax.swing.JTextField id_text;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -604,6 +648,7 @@ public class Municipality extends JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField name_text;
     private javax.swing.JTextField nod_text;
@@ -613,4 +658,21 @@ public class Municipality extends JFrame {
     private javax.swing.JTable table;
     private javax.swing.JTextField usernameField6;
     // End of variables declaration//GEN-END:variables
+
+    private static class HorizontalAlignmentHeaderRenderer implements TableCellRenderer {
+        private int horizontalAlignment = SwingConstants.LEFT;
+        
+        public HorizontalAlignmentHeaderRenderer(int horizontalAlignment) {
+            this.horizontalAlignment = horizontalAlignment;
+        }
+        
+        public Component getTableCellRendererComponent(
+            JTable table, Object value, boolean isSelected,
+            boolean hasFocus, int row, int column) {
+            TableCellRenderer r = table.getTableHeader().getDefaultRenderer();
+            JLabel l = (JLabel) r.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            l.setHorizontalAlignment(horizontalAlignment);
+            return l;
+        }
+    }
 }

@@ -58,7 +58,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jLabel8" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="50" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -78,28 +77,34 @@
                           </Group>
                           <Component id="jScrollPane1" min="-2" pref="636" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="name_text" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Component id="geography_combo" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Component id="pop_text" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Component id="nod_text" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Component id="phoneNumber_text" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Component id="id_text" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" pref="130" max="32767" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel6" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="name_text" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="geography_combo" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="pop_text" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="nod_text" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="phoneNumber_text" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="id_text" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" pref="130" max="32767" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel6" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jPanel1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
+          <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -109,8 +114,9 @@
               <Component id="jLabel8" min="-2" pref="69" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="search_text" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="search_text" alignment="3" pref="35" max="32767" attributes="0"/>
                   <Component id="jLabel9" alignment="3" max="32767" attributes="0"/>
+                  <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -142,7 +148,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="phoneNumber_text" max="32767" attributes="0"/>
+                          <Component id="phoneNumber_text" pref="38" max="32767" attributes="0"/>
                           <Component id="jLabel6" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -168,6 +174,14 @@
         <Property name="text" type="java.lang.String" value="&#x631;&#x642;&#x640;&#x640;&#x640;&#x645; &#x627;&#x644;&#x640;&#x628;&#x640;&#x644;&#x640;&#x640;&#x62f;&#x64a;&#x640;&#x640;&#x640;&#x629;"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JTextField" name="id_text">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="id_textActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -177,14 +191,13 @@
         <Property name="text" type="java.lang.String" value="&#x627;&#x633;&#x640;&#x640;&#x640;&#x645; &#x627;&#x644;&#x640;&#x628;&#x640;&#x644;&#x640;&#x640;&#x62f;&#x64a;&#x640;&#x640;&#x640;&#x629;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JTextField" name="name_text">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="18" style="1"/>
-        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="&#x639;&#x640;&#x640;&#x62f;&#x62f; &#x627;&#x644;&#x640;&#x640;&#x633;&#x640;&#x640;&#x643;&#x640;&#x640;&#x627;&#x646;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="name_textActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -194,40 +207,6 @@
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="&#x627;&#x644;&#x645;&#x646;&#x637;&#x642;&#x629; &#x627;&#x644;&#x62c;&#x63a;&#x631;&#x627;&#x641;&#x64a;&#x629;"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="18" style="1"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="&#x631;&#x642;&#x640;&#x640;&#x640;&#x645; &#x627;&#x644;&#x640;&#x647;&#x640;&#x640;&#x627;&#x62a;&#x640;&#x640;&#x640;&#x641;"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="18" style="1"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="&#x627;&#x633;&#x640;&#x640;&#x640;&#x645; &#x627;&#x644;&#x640;&#x639;&#x640;&#x640;&#x645;&#x640;&#x640;&#x64a;&#x640;&#x640;&#x62f;"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="id_text">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="id_textActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="name_text">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="name_textActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="geography_combo">
       <Properties>
@@ -255,6 +234,15 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="&#x639;&#x640;&#x640;&#x62f;&#x62f; &#x627;&#x644;&#x640;&#x640;&#x633;&#x640;&#x640;&#x643;&#x640;&#x640;&#x627;&#x646;"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JTextField" name="pop_text">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
@@ -263,13 +251,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pop_textActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="phoneNumber_text">
+    <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="&#x627;&#x633;&#x640;&#x640;&#x640;&#x645; &#x627;&#x644;&#x640;&#x639;&#x640;&#x640;&#x645;&#x640;&#x640;&#x64a;&#x640;&#x640;&#x62f;"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="phoneNumber_textActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nod_text">
       <Properties>
@@ -279,10 +268,27 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nod_textActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="&#x631;&#x642;&#x640;&#x640;&#x640;&#x645; &#x627;&#x644;&#x640;&#x647;&#x640;&#x640;&#x627;&#x62a;&#x640;&#x640;&#x640;&#x641;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="phoneNumber_text">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="phoneNumber_textActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JButton" name="btn_delete">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="28" green="28" red="c6" type="rgb"/>
+          <Color blue="33" green="33" red="ff" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
@@ -295,6 +301,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="36" style="1"/>
         </Property>
@@ -326,10 +335,7 @@
         <Component class="javax.swing.JTable" name="table">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);&#xa;renderer.setHorizontalAlignment(JLabel.RIGHT);">
-              <Color blue="9b" green="57" red="1" type="rgb"/>
+              <Font name="Arial" size="14" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="0">
@@ -368,15 +374,20 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="25" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
             <Property name="rowHeight" type="int" value="30"/>
-            <Property name="rowMargin" type="int" value="3"/>
+            <Property name="rowMargin" type="int" value="0"/>
+            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="0" type="rgb"/>
+            </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="false"/>
             </Property>
@@ -384,13 +395,16 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableMouseClicked"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;centerRenderer.setHorizontalAlignment(SwingConstants.RIGHT);&#xa;&#xa;for(int i = 0; i &lt; 6; i++){&#xa;    table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);&#xa;    table.getColumnModel().getColumn(i).setHeaderRenderer(centerRenderer);&#xa;}"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="btn_add">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="32" green="7d" red="2e" type="rgb"/>
+          <Color blue="0" green="99" red="0" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
@@ -404,7 +418,7 @@
     <Component class="javax.swing.JButton" name="btn_edit">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="9b" green="57" red="1" type="rgb"/>
+          <Color blue="ff" green="99" red="0" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
@@ -418,11 +432,53 @@
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="18" style="1"/>
+          <Font name="Arial" size="22" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="&#x627;&#x644;&#x640;&#x628;&#x640;&#x62d;&#x640;&#x62b; &#x639;&#x640;&#x646; &#x628;&#x640;&#x644;&#x640;&#x62f;&#x64a;&#x640;&#x629;"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="0" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel10" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="jLabel10" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel10">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="22" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="&#x625;&#x636;&#x640;&#x627;&#x641;&#x640;&#x629; &#x648;&#x62a;&#x640;&#x639;&#x640;&#x62f;&#x64a;&#x640;&#x644; &#x627;&#x644;&#x628;&#x640;&#x64a;&#x640;&#x627;&#x646;&#x640;&#x627;&#x62a;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
