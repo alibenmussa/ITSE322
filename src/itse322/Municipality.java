@@ -33,6 +33,8 @@ public class Municipality extends JFrame {
         getContentPane().setBackground(new Color(248, 248, 251));
         //عرض بيانات البلديات في الجدول
         showData(null);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Municipality");
     }
     
     public ArrayList<Muni> getMuniList(String search){
@@ -645,9 +647,10 @@ public class Municipality extends JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(() -> {
-            //Jframe عرض الواجهة الرئيسية
-            new Municipality().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Municipality().setVisible(true);
+            }
         });
     }
 
