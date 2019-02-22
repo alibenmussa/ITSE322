@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package itse322;
 
 import java.sql.Connection;
@@ -11,15 +6,26 @@ import java.sql.SQLException;
 
 /**
  *
- * @author ahmed
+ * مشروع مادة جافا المتقدمة
+ * 
+ * 216180392 - يوسف عبد الكريم بريكة
+ * 216180296 - علي جمال الدين بن موسى
+ * 
  */
+
+
 public class DB {
     private static Connection connection = null;
+    
+    final static String db = "jdbc:mysql://localhost/municipality?useUnicode=yes&characterEncoding=UTF-8";
+    final static String username = "root";
+    final static String password = "";
+    
     
     public static Connection DBconnect(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/municipality", "root", "");
+            connection = DriverManager.getConnection(db, username, password);
             return connection;
 
         } catch (ClassNotFoundException | SQLException ex) {

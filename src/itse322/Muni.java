@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package itse322;
 
 /**
  *
- * @author youse
+ * مشروع مادة جافا المتقدمة
+ * 
+ * 216180392 - يوسف عبد الكريم بريكة
+ * 216180296 - علي جمال الدين بن موسى
+ * 
  */
+
+
 public class Muni {
     private int id;
     private String name;

@@ -1,62 +1,61 @@
-
 package itse322;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import static java.nio.charset.StandardCharsets.*;
 import java.sql.PreparedStatement;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
- * @author youse
+ * مشروع مادة جافا المتقدمة
+ * 
+ * 216180392 - يوسف عبد الكريم بريكة
+ * 216180296 - علي جمال الدين بن موسى
+ * 
  */
+
+
 public class Municipality extends JFrame {
     
-     DefaultTableModel model;
+    public DefaultTableModel model;
+    
     public Municipality() {
         initComponents();
+        //تغيير لون الخلفية
         getContentPane().setBackground(new Color(248, 248, 251));
+        //عرض بيانات البلديات في الجدول
         showData(null);
     }
     
-    
-    
-    public ArrayList<Muni> getMuniList(String x){
+    public ArrayList<Muni> getMuniList(String search){
+        ArrayList<Muni> muniList = new ArrayList<>();
         try{
-            ArrayList<Muni> muniList = new ArrayList<>();
             Connection connection = DB.DBconnect();
             String query;
             
-            System.out.println(x);
-            if (x == null)
-                query = "SELECT * FROM `muni`";
+            //إذا كانت قيمة هذا المتغير غير معرفة فهنا يتم جلب جميع البيانات
+            //أما إذا كانت لديه قيمة فإنه يتم جلب البلديات التي قيمتها تبدأ بقيمة مثلx
+            if (search == null)
+                query = "SELECT * FROM `muni` ORDER BY `id` ASC";
             else {
-                query = "SELECT * FROM `muni` WHERE `municipality_name` LIKE '%" + x + "%' OR `id` LIKE '" + x + "%' ORDER BY `municipality_name` DESC";
+                //البحث عن البلدية إما ببداية اسمها أو ببداية رقمه
+                query = "SELECT * FROM `muni` WHERE `municipality_name` LIKE '" + search + "%' OR `id` LIKE '" + search + "%' ORDER BY `id` ASC";
             }
-            Statement stmt = null ;
-            ResultSet rs = null ;
-            stmt = connection.createStatement();
-            rs = stmt.executeQuery(query);
+            
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
            
-            System.out.println("niuuullllll");
             while(rs.next()){
                 Muni m = new Muni();
                 m.setId(rs.getInt("id"));
-                System.out.println(rs.getInt("id"));
                 m.setName(rs.getString("municipality_name"));
                 m.setGeography(rs.getString("geography"));
                 m.setPop(rs.getInt("population"));
@@ -64,31 +63,29 @@ public class Municipality extends JFrame {
                 m.setPhone_number(rs.getInt("phone_number"));
                 muniList.add(m);
             }
-            
             rs.close();
             stmt.close();
             connection.close();
             
-            return muniList;
         } catch(Exception ex){
             Alert.viewWarningMessage("حدث خطأ! يرجى إعادة المحاولة");
+        } finally {
+            return muniList;
         }
-        return null;
     }
     
-    public void showData(String x){
-        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);
-        renderer.setHorizontalAlignment( jLabel1.RIGHT );
-
-        
+    public void showData(String search){
         model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         
-        ArrayList<Muni> list = getMuniList(x);
+        //إنشاء مصفوفة من نوعMuni لتخزين البيانات المجلوبة من قاعدة البيانات فيها
+        ArrayList<Muni> list = getMuniList(search);
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         
         int selecteddRow = table.getSelectedRow();
 
+        //تفعيل أزرار الحذف والتعديل عندما يتم اختيار أحد الصفوف
+        //وتعطيلها عندما لا يكون هناك أي بلدية في الجدول أو عند عدم اختيار صف
         if (list.size() > 0 && selecteddRow != -1) {
             btn_delete.setEnabled(true);
             btn_edit.setEnabled(true);
@@ -98,54 +95,68 @@ public class Municipality extends JFrame {
         }
         
         Object[] row = new Object[6];
+        //إضافة البيانات التي تم جلبها من قاعدة اليانات للجدول
         for(int i = 0 ; i < list.size() ; i++){
-            row[5] = list.get(i).getId();
-            row[4] = list.get(i).getName();
-            row[3] = list.get(i).getGeography();
-            row[2] = list.get(i).getPop();
-            row[1] = list.get(i).getNod();
             row[0] = list.get(i).getPhone_number();
+            row[1] = list.get(i).getNod();
+            row[2] = list.get(i).getPop();
+            row[3] = list.get(i).getGeography();
+            row[4] = list.get(i).getName();
+            row[5] = list.get(i).getId();
             model.addRow(row);
         }
-      
     }
     
-    public void executeSQLQuery(String  query, String message)
+    //دالة لتنفيذ الكويريز مع إظهار رسالة نجاح عند نجاح التنفيذ ورسالة خطأ عند الفشل
+    //قمنا بإنشاء هذه الدالةلاستدعاءها  بدلا من نسخ كود تنفيذ أوامر قاعدة البيانات في كل مرة
+    public void executeSQLQuery(String  query, String message, String error)
     {
-       
-     try
-     {
-         Connection connection = DB.DBconnect();
-         Statement st = connection.createStatement();
-         if((st.executeUpdate(query)) == 1)
-         {
-             showData(null);
-             Alert.viewSuccessMessage(message);
-         }
-         else{
-             Alert.viewErrorMessage("حدث خطأ غير متوقع، يرجى إعادة المحاولة");
-         }
-     }  catch (SQLException ex) {
-            Alert.viewErrorMessage("حدث خطأ غير متوقع، يرجى إعادة المحاولة");
-     }
+        //إذا لم يمرر للدالة رسالة خطأ معينة يتم عرض هذه الرسالة
+        if (error == null) {
+          error = "حدث خطأ غير متوقع، يرجى إعادة المحاولة";
+        }
+        try
+        {
+            Connection connection = DB.DBconnect();
+            Statement stmt = connection.createStatement();
+            if((stmt.executeUpdate(query)) == 1)
+            {
+                //تحديث البيانات في الجدول عند نجاح العملية
+               showData(null);
+               clearFields();
+               Alert.viewSuccessMessage(message);
+            }
+            else{
+                Alert.viewErrorMessage(error);
+            }
+        }  catch (SQLException ex) {
+               Alert.viewErrorMessage(error);
+        }
     }
     
-    public String convertUTF(String text) {
-        System.out.println(text);
-        byte[] ptext = text.getBytes(); 
-        System.out.println(ptext);
-        String convertedText = new String(ptext, UTF_8); 
-        System.out.println(convertedText);
-        return convertedText;
-    }
-    
+    //تفريغ قيم حقول البيناتات ومربع البحث
     public void clearFields() {
-
+        search_text.setText("");
         id_text.setText("");
         name_text.setText("");
         pop_text.setText("");
         nod_text.setText("");
         phoneNumber_text.setText("");
+    }
+    
+    //التحقيق من الحقول وأنها ليست فارغة والتأكد من الحقول التي يجب أن تكون قيمتها أرقام
+    public boolean checkFields() {
+        if (id_text.getText().isEmpty() || name_text.getText().isEmpty() || pop_text.getText().isEmpty() || nod_text.getText().isEmpty() || phoneNumber_text.getText().isEmpty()) {
+            return false;
+        }
+        try {
+            if (Integer.parseInt(id_text.getText()) <= 0 || Integer.parseInt(pop_text.getText()) <= 0 || Integer.parseInt(phoneNumber_text.getText()) <= 0) {
+                return false;
+            }
+        } catch(Exception ex) {
+            return false;
+        }
+        return true;
     }
   
     /**
@@ -274,8 +285,9 @@ public class Municipality extends JFrame {
             }
         });
 
-        btn_delete.setBackground(new java.awt.Color(255, 51, 51));
-        btn_delete.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_delete.setBackground(new java.awt.Color(204, 0, 51));
+        btn_delete.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        btn_delete.setForeground(new java.awt.Color(255, 255, 255));
         btn_delete.setText("حــــــذف");
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,12 +297,13 @@ public class Municipality extends JFrame {
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 0, 153));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("نـــظـــام بـــلـــديـــات لـــيــــبــــيـــا");
+        jLabel8.setText("وزارة الـــحـــكـــم الـــمـــحـــلـــي - نـــظـــام بـــلـــديـــات لـــيــــبــــيـــا");
 
         search_text.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         search_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        search_text.setToolTipText("");
+        search_text.setToolTipText("ادخل اسم أو رقم البلدية");
         search_text.setName(""); // NOI18N
         search_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,14 +356,16 @@ public class Municipality extends JFrame {
             table.getColumnModel().getColumn(0).setResizable(false);
             table.getColumnModel().getColumn(1).setResizable(false);
             table.getColumnModel().getColumn(2).setResizable(false);
+            table.getColumnModel().getColumn(2).setPreferredWidth(50);
             table.getColumnModel().getColumn(3).setResizable(false);
             table.getColumnModel().getColumn(4).setResizable(false);
             table.getColumnModel().getColumn(5).setResizable(false);
             table.getColumnModel().getColumn(5).setPreferredWidth(25);
         }
 
-        btn_add.setBackground(new java.awt.Color(0, 153, 0));
-        btn_add.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_add.setBackground(new java.awt.Color(0, 153, 102));
+        btn_add.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        btn_add.setForeground(new java.awt.Color(255, 255, 255));
         btn_add.setText("إضـــافـــة");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,8 +373,9 @@ public class Municipality extends JFrame {
             }
         });
 
-        btn_edit.setBackground(new java.awt.Color(0, 153, 255));
-        btn_edit.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_edit.setBackground(new java.awt.Color(0, 102, 204));
+        btn_edit.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        btn_edit.setForeground(new java.awt.Color(255, 255, 255));
         btn_edit.setText("تـــعـــديـــل");
         btn_edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -429,10 +445,10 @@ public class Municipality extends JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(50, 50, 50))
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -505,37 +521,39 @@ public class Municipality extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_geography_comboActionPerformed
 
+    //دالة حذف بيانات بلدية من الجدول
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         int selectedRow = table.getSelectedRow();
+        //التأكد من أن هناك صف تم تحديده في الجدول
         if (selectedRow != -1) {
         String query = "DELETE FROM `muni` WHERE id =  " + table.getModel().getValueAt(selectedRow, 5).toString();
-        executeSQLQuery(query, "تم حذف هذه البلدية بنجاح!");
-//        clearFields();
-        } else {
-            Alert.viewErrorMessage("لم تقم بتحديد أي صف من الجدول");
+        executeSQLQuery(query, "تم حذف هذه البلدية بنجاح!", null);
         }
     }//GEN-LAST:event_deleteActionPerformed
 
     private void search_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_textActionPerformed
-        
-        
+    
     }//GEN-LAST:event_search_textActionPerformed
 
+    //دالة إضافة بلدية
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-
-        String query = "INSERT INTO `muni` VALUES (" + id_text.getText() + ", '" + name_text.getText() + "', '" + geography_combo.getSelectedItem().toString() + "', "  + pop_text.getText() + ", '" + nod_text.getText() + "', " + phoneNumber_text.getText() + ")";
-        String message = "تمت إضافة " + name_text.getText() + " بنجاح!";
-        executeSQLQuery(query, message);
-        clearFields();
-        
+        if (checkFields() == true) {
+            String query = "INSERT INTO `muni` VALUES (" + id_text.getText() + ", '" + name_text.getText() + "', '" + geography_combo.getSelectedItem().toString() + "', "  + pop_text.getText() + ", '" + nod_text.getText() + "', " + phoneNumber_text.getText() + ")";
+            String message = "تمت إضافة " + name_text.getText() + " بنجاح";
+            String error = "رقم البلدية الذي ادخلته موجود مسبقا";
+            executeSQLQuery(query, message, error);
+        } else {
+            Alert.viewErrorMessage("قمت بإدخال غير صحيح");
+        }
     }//GEN-LAST:event_addActionPerformed
 
+    //دالة تحديث بيانات بلدية ما
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
         try {
             Connection connection = DB.DBconnect();
-            System.out.println(geography_combo.getSelectedItem().toString());
             String query = "UPDATE `muni` SET `municipality_name` = ?, `geography` = ?, `population`= ?, `Dean_of_the_Muni`= ?, `phone_number`= ? WHERE `id` = ?";
-             PreparedStatement ps = connection.prepareStatement(query);
+            PreparedStatement ps = connection.prepareStatement(query);
+            
              ps.setString(1, name_text.getText());
              ps.setString(2, geography_combo.getSelectedItem().toString());
              ps.setString(3, pop_text.getText());
@@ -543,12 +561,10 @@ public class Municipality extends JFrame {
              ps.setString(5, phoneNumber_text.getText());
              ps.setString(6, id_text.getText());
              
-             boolean state = ps.execute();
-             if (!state) {
-                Alert.viewSuccessMessage("تم تحديث بيانات البلدية بنجاح!");
-                model = (DefaultTableModel) table.getModel();
-                model.setRowCount(0);
+             if (ps.executeUpdate() == 1) {
+                Alert.viewSuccessMessage("تم تحديث بيانات البلدية بنجاح");
                 showData(null);
+                clearFields();
              } else {
                  Alert.viewErrorMessage("قمت بإدخال غير صحيح");
              }
@@ -576,14 +592,17 @@ public class Municipality extends JFrame {
     }//GEN-LAST:event_phoneNumber_textActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-            
         int selectedRow = table.getSelectedRow();
         if (selectedRow != -1) {
+            //تفعيل أزرار الحذف والتعديل عند اختيار الصف
             btn_delete.setEnabled(true);
             btn_edit.setEnabled(true);
+            
+            //عرض الصف الذي تم اختيار من الجدول في الحقول الجانبية
             TableModel model = table.getModel();
             id_text.setText(model.getValueAt(selectedRow, 5).toString());
             name_text.setText(model.getValueAt(selectedRow, 4).toString());
+            geography_combo.setSelectedItem(model.getValueAt(selectedRow, 3).toString());
             pop_text.setText(model.getValueAt(selectedRow, 2).toString());
             nod_text.setText(model.getValueAt(selectedRow, 1).toString());
             phoneNumber_text.setText(model.getValueAt(selectedRow, 0).toString());
@@ -591,16 +610,16 @@ public class Municipality extends JFrame {
         
     }//GEN-LAST:event_tableMouseClicked
 
+    //بمجرد كتابة حرف تتم عملية البحث
     private void search_textKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_textKeyReleased
         String search = search_text.getText();
+        //جلب بيانات البلديات في الجدول بناء على الكلمة المدخلة في حقل البحث
         showData(search);
     }//GEN-LAST:event_search_textKeyReleased
 
-    /**
-     * @param args the command line arguments
-     */
+    //الدالة الرئيسية
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+       /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -626,8 +645,8 @@ public class Municipality extends JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
+            //Jframe عرض الواجهة الرئيسية
             new Municipality().setVisible(true);
         });
     }
@@ -658,21 +677,4 @@ public class Municipality extends JFrame {
     private javax.swing.JTable table;
     private javax.swing.JTextField usernameField6;
     // End of variables declaration//GEN-END:variables
-
-    private static class HorizontalAlignmentHeaderRenderer implements TableCellRenderer {
-        private int horizontalAlignment = SwingConstants.LEFT;
-        
-        public HorizontalAlignmentHeaderRenderer(int horizontalAlignment) {
-            this.horizontalAlignment = horizontalAlignment;
-        }
-        
-        public Component getTableCellRendererComponent(
-            JTable table, Object value, boolean isSelected,
-            boolean hasFocus, int row, int column) {
-            TableCellRenderer r = table.getTableHeader().getDefaultRenderer();
-            JLabel l = (JLabel) r.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            l.setHorizontalAlignment(horizontalAlignment);
-            return l;
-        }
-    }
 }
