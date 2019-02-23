@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  * 
  */
 
-public class Alert {
-     public static void viewWarningMessage(String string) {
+public class Message {
+     public static void showWarning(String string) {
         JOptionPane.showMessageDialog(null, string, "تحذير", JOptionPane.WARNING_MESSAGE);
     }
-    public static void viewSuccessMessage(String string) {
+    public static void showSuccess(String string) {
         JOptionPane.showMessageDialog(null, string, "نجاح", JOptionPane.INFORMATION_MESSAGE);
     }
-    public static void viewErrorMessage(String string) {
+    public static void showError(String string) {
         JOptionPane.showMessageDialog(null, string, "خطأ", JOptionPane.ERROR_MESSAGE);
     }
     

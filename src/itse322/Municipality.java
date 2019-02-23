@@ -33,8 +33,7 @@ public class Municipality extends JFrame {
         getContentPane().setBackground(new Color(248, 248, 251));
         //عرض بيانات البلديات في الجدول
         showData(null);
-        this.setLocationRelativeTo(null);
-        this.setTitle("Municipality");
+        setTitle("نظام بلديات ليبيا");
     }
     
     public ArrayList<Muni> getMuniList(String search){
@@ -70,7 +69,7 @@ public class Municipality extends JFrame {
             connection.close();
             
         } catch(Exception ex){
-            Alert.viewWarningMessage("حدث خطأ! يرجى إعادة المحاولة");
+            Message.showWarning("حدث خطأ! يرجى إعادة المحاولة");
         } finally {
             return muniList;
         }
@@ -126,13 +125,13 @@ public class Municipality extends JFrame {
                 //تحديث البيانات في الجدول عند نجاح العملية
                showData(null);
                clearFields();
-               Alert.viewSuccessMessage(message);
+               Message.showSuccess(message);
             }
             else{
-                Alert.viewErrorMessage(error);
+                Message.showError(error);
             }
         }  catch (SQLException ex) {
-               Alert.viewErrorMessage(error);
+               Message.showError(error);
         }
     }
     
@@ -224,6 +223,7 @@ public class Municipality extends JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("رقـــم الـبـلــديـــة");
 
+        id_text.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         id_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         id_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,6 +235,7 @@ public class Municipality extends JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("اســـم الـبـلــديـــة");
 
+        name_text.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         name_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         name_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +248,7 @@ public class Municipality extends JFrame {
         jLabel5.setText("المنطقة الجغرافية");
 
         geography_combo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        geography_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "طرابلس الكبرى", "سهل جفارة", "وادي الحياة", "الجبل الأخضر", "البطنان", "وادي الشاطئ", "الجبل الغربي", "غات", " " }));
+        geography_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "طرابلس الكبرى", "سهل جفارة", "وادي الحياة", "الجبل الأخضر", "البطنان", "وادي الشاطئ", "الجبل الغربي", "غات", "الهلال النفطي" }));
         geography_combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 geography_comboActionPerformed(evt);
@@ -258,6 +259,7 @@ public class Municipality extends JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("عــدد الــســكــان");
 
+        pop_text.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         pop_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         pop_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,6 +271,7 @@ public class Municipality extends JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("اســـم الـعــمــيــد");
 
+        nod_text.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         nod_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         nod_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,6 +283,7 @@ public class Municipality extends JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("رقـــم الـهــاتـــف");
 
+        phoneNumber_text.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         phoneNumber_text.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         phoneNumber_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,7 +303,7 @@ public class Municipality extends JFrame {
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel8.setForeground(new java.awt.Color(0, 51, 204));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("وزارة الـــحـــكـــم الـــمـــحـــلـــي - نـــظـــام بـــلـــديـــات لـــيــــبــــيـــا");
 
@@ -545,35 +549,39 @@ public class Municipality extends JFrame {
             String error = "رقم البلدية الذي ادخلته موجود مسبقا";
             executeSQLQuery(query, message, error);
         } else {
-            Alert.viewErrorMessage("قمت بإدخال غير صحيح");
+            Message.showError("قمت بإدخال غير صحيح");
         }
     }//GEN-LAST:event_addActionPerformed
 
     //دالة تحديث بيانات بلدية ما
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+        int selectedRow = table.getSelectedRow();
+        String selectedId = table.getModel().getValueAt(selectedRow, 5).toString();
         try {
             Connection connection = DB.DBconnect();
-            String query = "UPDATE `muni` SET `municipality_name` = ?, `geography` = ?, `population`= ?, `Dean_of_the_Muni`= ?, `phone_number`= ? WHERE `id` = ?";
+            String query = "UPDATE `muni` SET `id` = ?, `municipality_name` = ?, `geography` = ?, `population`= ?, `Dean_of_the_Muni`= ?, `phone_number`= ? WHERE `id` = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             
-             ps.setString(1, name_text.getText());
-             ps.setString(2, geography_combo.getSelectedItem().toString());
-             ps.setString(3, pop_text.getText());
-             ps.setString(4, nod_text.getText());
-             ps.setString(5, phoneNumber_text.getText());
-             ps.setString(6, id_text.getText());
+             ps.setString(1, id_text.getText());
+             ps.setString(2, name_text.getText());
+             ps.setString(3, geography_combo.getSelectedItem().toString());
+             ps.setString(4, pop_text.getText());
+             ps.setString(5, nod_text.getText());
+             ps.setString(6, phoneNumber_text.getText());
+             //تعديل البيانات بناء على قيمة رقم البلدية الموجود في الصف المختار
+             ps.setString(7, selectedId);
              
              if (ps.executeUpdate() == 1) {
-                Alert.viewSuccessMessage("تم تحديث بيانات البلدية بنجاح");
+                Message.showSuccess("تم تحديث بيانات البلدية بنجاح");
                 showData(null);
                 clearFields();
              } else {
-                 Alert.viewErrorMessage("قمت بإدخال غير صحيح");
+                 Message.showError("قمت بإدخال غير صحيح");
              }
              ps.close();
              connection.close();
         } catch(SQLException ex) {
-            Alert.viewErrorMessage("قمت بإدخال غير صحيح");
+            Message.showError("قمت بإدخال غير صحيح");
         }
     }//GEN-LAST:event_editActionPerformed
 
@@ -647,11 +655,6 @@ public class Municipality extends JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Municipality().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

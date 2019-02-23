@@ -29,7 +29,7 @@ public class DB {
             return connection;
 
         } catch (ClassNotFoundException | SQLException ex) {
-            Alert.viewErrorMessage("لا يمكن الاتصال بقاعدة البيانات");
+            Message.showError("لا يمكن الاتصال بقاعدة البيانات");
             return connection;
         }
     }

@@ -176,6 +176,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="id_text">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
       <Events>
@@ -193,6 +196,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="name_text">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
       <Events>
@@ -223,7 +229,7 @@
             <StringItem index="5" value="&#x648;&#x627;&#x62f;&#x64a; &#x627;&#x644;&#x634;&#x627;&#x637;&#x626;"/>
             <StringItem index="6" value="&#x627;&#x644;&#x62c;&#x628;&#x644; &#x627;&#x644;&#x63a;&#x631;&#x628;&#x64a;"/>
             <StringItem index="7" value="&#x63a;&#x627;&#x62a;"/>
-            <StringItem index="8" value=" "/>
+            <StringItem index="8" value="&#x627;&#x644;&#x647;&#x644;&#x627;&#x644; &#x627;&#x644;&#x646;&#x641;&#x637;&#x64a;"/>
           </StringArray>
         </Property>
       </Properties>
@@ -245,6 +251,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="pop_text">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
       <Events>
@@ -262,6 +271,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="nod_text">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
       <Events>
@@ -279,6 +291,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="phoneNumber_text">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
       <Events>
@@ -311,7 +326,7 @@
           <Font name="Dialog" size="36" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="0" red="33" type="rgb"/>
+          <Color blue="cc" green="33" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="&#x648;&#x632;&#x627;&#x631;&#x629; &#x627;&#x644;&#x640;&#x640;&#x640;&#x62d;&#x640;&#x640;&#x640;&#x643;&#x640;&#x640;&#x640;&#x645; &#x627;&#x644;&#x640;&#x640;&#x640;&#x645;&#x640;&#x640;&#x640;&#x62d;&#x640;&#x640;&#x640;&#x644;&#x640;&#x640;&#x640;&#x64a; - &#x646;&#x640;&#x640;&#x640;&#x638;&#x640;&#x640;&#x640;&#x627;&#x645; &#x628;&#x640;&#x640;&#x640;&#x644;&#x640;&#x640;&#x640;&#x62f;&#x64a;&#x640;&#x640;&#x640;&#x627;&#x62a; &#x644;&#x640;&#x640;&#x640;&#x64a;&#x640;&#x640;&#x640;&#x640;&#x628;&#x640;&#x640;&#x640;&#x640;&#x64a;&#x640;&#x640;&#x640;&#x627;"/>
